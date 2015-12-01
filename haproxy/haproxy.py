@@ -322,7 +322,7 @@ class Haproxy(object):
                     if setting.strip():
                         listen.append(setting.strip().replace("\,", ","))
 
-            cfg["listen port_%s" % port_num] = listen
+            cfg["listen port_%s_%s" % bind_port, port_num] = listen
             cfgs.append(cfg)
 
         return cfgs
