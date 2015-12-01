@@ -526,6 +526,8 @@ class Haproxy(object):
             else:
                 if self._get_service_attr("virtual_host", service_alias):
                     cfg["backend SERVICE_%s" % service_alias] = sorted(backend)
+                if self._get_service_attr("tcp_port", service_alias):
+                    cfg["backend SERVICE_%s_%s" % service_alias, self._get_service_attr("tcp_port", service_alias)]
                 else:
                     cfg["backend default_service"] = sorted(backend)
         return cfg
