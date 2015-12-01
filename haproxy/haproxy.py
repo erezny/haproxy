@@ -283,8 +283,8 @@ class Haproxy(object):
             port_num = port
             bind_port = port
             if ":" in port:
-                port_num=port[:port.find(":")-1]
-                bind_port=port[port.find(":")-1:]
+                port_num=port[:port.find(":")]
+                bind_port=port[port.find(":")+1:]
             if port.lower().endswith("/ssl"):
                 port_num = port[:-4]
                 if self.ssl:
