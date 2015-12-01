@@ -281,12 +281,16 @@ class Haproxy(object):
 
             ssl = False
             port_num = port
+            bind_port = port
+            if ":" in port:
+                  port_num=port[:port.find(":")-1]
+                  bind_port=port[port.find(":")-1:]
             if port.lower().endswith("/ssl"):
                 port_num = port[:-4]
                 if self.ssl:
                     ssl = True
 
-            bind = " ".join([port_num, self.extra_bind_settings.get(port_num, "")])
+            bind = " ".join([bind_port, self.extra_bind_settings.get(port_num, "")])
             if ssl:
                 bind = " ".join([bind.strip(), self.ssl])
 
@@ -526,8 +530,6 @@ class Haproxy(object):
             else:
                 if self._get_service_attr("virtual_host", service_alias):
                     cfg["backend SERVICE_%s" % service_alias] = sorted(backend)
-                if self._get_service_attr("tcp_port", service_alias):
-                    cfg["backend SERVICE_%s_%s" % service_alias, self._get_service_attr("tcp_port", service_alias)]
                 else:
                     cfg["backend default_service"] = sorted(backend)
         return cfg
