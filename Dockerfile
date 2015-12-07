@@ -6,7 +6,7 @@ RUN echo 'deb http://ppa.launchpad.net/vbernat/haproxy-1.5/ubuntu trusty main' >
     echo 'deb-src http://ppa.launchpad.net/vbernat/haproxy-1.5/ubuntu trusty main' >> /etc/apt/sources.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 505D97A41C61B9CD && \
     apt-get update && \
-    apt-get install -y --no-install-recommends haproxy python-pip && \
+    apt-get install -y --no-install-recommends haproxy python-pip curl wget && \
     apt-get clean && \
     pip install python-tutum==0.16.21 && \
     rm -rf /var/lib/apt/lists/* && \
